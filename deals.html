@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>This week — Family Deals Canada</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html"><strong>Family Deals Canada</strong><span>This week’s list</span></a>
+      <nav><a href="index.html">Home</a><a href="about.html">How we pick</a></nav>
+    </header>
+    <div class="prose">
+      <h1>This week</h1>
+      <p>Source: public RFD Hot Deals Atom feed. We do not reprint the whole forum. A GitHub Action can refresh family-keyword candidates from that feed; an editor still writes the “why” in data/deals.json.</p>
+    </div>
+    <div class="grid cards" id="all"></div>
+    <footer class="site"><p><a href="index.html">Back home</a></p></footer>
+  </div>
+  <script>
+    fetch("data/deals.json").then(r => r.json()).then(data => {
+      const root = document.getElementById("all");
+      data.picks.forEach(p => {
+        const el = document.createElement("article");
+        el.className = "card";
+        el.innerHTML = `<div class="meta">${p.store} · ${p.posted}${p.affiliate ? " · affiliate-soon" : ""}</div>
+          <h3>${p.title}</h3>
+          <p class="why">${p.why}</p>
+          <a class="btn" href="${p.href}" rel="noopener">Open deal</a>
+          <a class="btn ghost" href="${p.thread}" rel="noopener">RFD thread</a>`;
+        root.appendChild(el);
+      });
+    });
+  </script>
+</body>
+</html>

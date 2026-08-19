@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Family Deals Canada — curated picks for parents of kids 5–10</title>
+  <meta name="description" content="A short, curated list of Canadian family deals: kids meals, groceries, school, and Amazon.ca staples. Vaughan / Toronto. Newsletter first.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="brand" href="index.html">
+        <strong>Family Deals Canada</strong>
+        <span>Vaughan / Toronto · kids 5–10</span>
+      </a>
+      <nav>
+        <a href="deals.html">This week</a>
+        <a href="about.html">How we pick</a>
+        <a href="#list">Get the list</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="badge">New shop · Aug 2026 · not a link farm</div>
+      <h1>The short list Canadian parents actually use.</h1>
+      <p class="lede">Kids meals, lunch-box staples, school stuff, and a handful of Amazon.ca searches worth opening. Edited for families with kids about 5–10. If it is not useful in a real week, it does not go on the page.</p>
+    </section>
+
+    <section>
+      <h2>This week’s editor picks</h2>
+      <p class="note">Pulled from the public RedFlagDeals Hot Deals Atom feed (<a href="https://forums.redflagdeals.com/feed/forum/9">forum/9</a>) on 18 Aug 2026, then cut down. The raw feed is 15+ threads; we kept eight that a family would use.</p>
+      <div class="grid cards" id="picks"></div>
+      <p><a class="btn ghost" href="deals.html">Full write-ups</a></p>
+    </section>
+
+    <section>
+      <h2>Amazon.ca family shops <small style="font-weight:400;color:var(--muted)">(affiliate-soon)</small></h2>
+      <p class="note">These are regular Amazon.ca search URLs today. Tagged so they can take an Associates tag after a new Canada application is accepted. Previous Associates ID <code>infoocode09-20</code> was rejected 24 Sep 2023 for missing three qualifying sales — Amazon said reapply is allowed once the site has traffic. No tag is appended yet.</p>
+      <div class="grid shops">
+        <a class="shop" href="https://www.amazon.ca/s?k=kids+reward+chart+stickers">Kids rewards<small>charts, stickers, jars</small></a>
+        <a class="shop" href="https://www.amazon.ca/s?k=school+lunch+box+kids">Lunch boxes<small>school-week gear</small></a>
+        <a class="shop" href="https://www.amazon.ca/s?k=family+grocery+staples+canada">Family staples<small>snacks, pantry</small></a>
+        <a class="shop" href="https://www.amazon.ca/s?k=kids+building+toys+5-10">Building toys<small>ages 5–10</small></a>
+        <a class="shop" href="https://www.amazon.ca/s?k=kids+winter+jacket+canada">Winter jackets<small>GTA season</small></a>
+        <a class="shop" href="https://www.amazon.ca/s?k=family+board+games+kids+8">Board games<small>weekend table</small></a>
+      </div>
+    </section>
+
+    <section id="list" class="capture">
+      <h2>Get the Saturday short list</h2>
+      <p>One email a week. Family-usable Canadian deals, plus the Amazon shops once the tag is live. No daily blast.</p>
+      <form action="mailto:andrey.dev@gmail.com?subject=Family%20Deals%20Canada%20subscribe" method="post" enctype="text/plain">
+        <label for="email">Email</label><br>
+        <input id="email" name="email" type="email" required placeholder="you@example.com">
+        <button type="submit">Join the list</button>
+      </form>
+      <p class="note">Capture is live via mailto to andrey.dev@gmail.com. Beehiiv Launch (free, no card) and Buttondown both require creating a publisher password — not invented here. Subscriber ledger (Drive): https://docs.google.com/spreadsheets/d/1eTR5ibEORQaQiP8NmOMSNcXYK-ArRVu4TgZqNQzW_wE/edit</p>
+    </section>
+
+    <footer class="site">
+      <p>© 2026 Family Deals Canada · Andrey Malashenko · Vaughan / Toronto · <a href="mailto:andrey.dev@gmail.com">andrey.dev@gmail.com</a></p>
+      <p>Independent of HouseCost.ca and StarkyStar. Amazon and other store links are not affiliate-tagged yet. Deals expire; confirm price and stock before you buy.</p>
+    </footer>
+  </div>
+  <script>
+    fetch("data/deals.json").then(r => r.json()).then(data => {
+      const root = document.getElementById("picks");
+      data.picks.slice(0, 4).forEach(p => {
+        const el = document.createElement("article");
+        el.className = "card";
+        el.innerHTML = `<div class="meta">${p.store} · ${p.posted}</div>
+          <h3>${p.title}</h3>
+          <p class="why">${p.why}</p>
+          <a class="btn" href="${p.href}" rel="noopener">Open deal</a>
+          <a class="btn ghost" href="${p.thread}" rel="noopener">RFD thread</a>`;
+        root.appendChild(el);
+      });
+    });
+  </script>
+</body>
+</html>
