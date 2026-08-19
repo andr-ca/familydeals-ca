@@ -10,5 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update gh-pages to this commit
-        run: git push origin HEAD:gh-pages
+        with:
+          fetch-depth: 0
+      - name: Sync shop files to gh-pages
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout gh-pages
+          git checkout main -- index.html about.html deals.html css data .nojekyll README.md
+          git add -- index.html about.html deals.html css data .nojekyll README.md
+          if git diff --cached --quiet; then
+            echo "No shop file changes"
+          else
+            git commit -m "Publish shop from main"
+            git push origin gh-pages
+          fi
