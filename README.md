@@ -18,6 +18,12 @@ https://forums.redflagdeals.com/feed/forum/9
 `data/deals.json` is the curated list. `scripts/refresh_family_deals.py`
 writes keyword *candidates* only.
 
+## Analytics
+
+Optional GA4. Set `window.FAMILYDEALS_GA4_MEASUREMENT_ID` in `js/ga4-id.js`
+to a `G-...` id. An empty string means no tag is injected. Search Console
+URL-prefix is tracked in issue #2.
+
 ## Amazon
 
 Apply: https://associates.amazon.ca/signup (sign-in required).
