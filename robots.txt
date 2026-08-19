@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andr-ca.github.io/familydeals-ca/sitemap.xml
